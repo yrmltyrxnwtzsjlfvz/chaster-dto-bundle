@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterDtoBundle\Objects\Dto;
 
+use Bytes\DateBundle\Objects\ComparableDateInterval;
 use DateInterval;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
@@ -37,15 +38,15 @@ class WearerLockActionDto extends AbstractLockDto
         ];
 
         if (!is_null($this->getLength())) {
-            $return['length'] = $this->getLength();
+            $return['length'] = ComparableDateInterval::normalizeToSeconds($this->getLength());
         }
 
         if (!is_null($this->getMinLength())) {
-            $return['minLength'] = $this->getMinLength();
+            $return['minLength'] = ComparableDateInterval::normalizeToSeconds($this->getMinLength());
         }
 
         if (!is_null($this->getMaxLength())) {
-            $return['maxLength'] = $this->getMaxLength();
+            $return['maxLength'] = ComparableDateInterval::normalizeToSeconds($this->getMaxLength());
         }
 
         return $return;
