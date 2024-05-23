@@ -2,7 +2,9 @@
 
 namespace Fake\ChasterDtoBundle\Objects\Dto;
 
+use Bytes\DateBundle\Objects\ComparableDateInterval;
 use DateInterval;
+use Exception;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
 use Fake\ChasterObjects\Objects\Lock\LockId;
@@ -35,5 +37,35 @@ class KeyholderLockActionDto extends AbstractLockDto
                 ->atPath('action')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Returns a normalized array of key => value for data transfer.
+     *
+     * @return array{lockId: string|null, action: string|null, length: DateInterval|null, minLength: DateInterval|null, maxLength: DateInterval|null, reason: string|null}
+     *
+     * @throws Exception
+     */
+    public function denormalize(): array
+    {
+        $return = parent::denormalize();
+
+        if (!is_null($this->getLength())) {
+            $return['length'] = ComparableDateInterval::normalizeToSeconds($this->getLength());
+        }
+
+        if (!is_null($this->getMinLength())) {
+            $return['minLength'] = ComparableDateInterval::normalizeToSeconds($this->getMinLength());
+        }
+
+        if (!is_null($this->getMaxLength())) {
+            $return['maxLength'] = ComparableDateInterval::normalizeToSeconds($this->getMaxLength());
+        }
+
+        if (!is_null($this->getReason())) {
+            $return['reason'] = $this->getReason();
+        }
+
+        return $return;
     }
 }

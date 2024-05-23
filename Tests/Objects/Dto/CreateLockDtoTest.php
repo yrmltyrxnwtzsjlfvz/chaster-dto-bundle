@@ -93,4 +93,23 @@ class CreateLockDtoTest extends AbstractTestLockDto
 
         $this->validate($lock);
     }
+
+    public function testDenormalize(): void
+    {
+        $class = static::getTestClassName();
+        $lock = $class::create(lock: self::TEST_LOCKID);
+
+        $this->assertEquals([
+            'lockId' => self::TEST_LOCKID,
+            'action' => ChasterDtoActions::CREATE_LOCK->value,
+        ], $lock->denormalize());
+
+        $lock = $class::create(lock: self::TEST_LOCKID, password: self::TEST_PASSWORD);
+
+        $this->assertEquals([
+            'lockId' => self::TEST_LOCKID,
+            'action' => ChasterDtoActions::CREATE_LOCK->value,
+            'password' => self::TEST_PASSWORD,
+        ], $lock->denormalize());
+    }
 }

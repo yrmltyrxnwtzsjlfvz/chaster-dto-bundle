@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterDtoBundle\Tests\Objects\Dto;
 
+use DateInterval;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterDtoBundle\Objects\Dto\KeyholderLockActionDto;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
@@ -119,5 +120,28 @@ class KeyholderLockActionDtoTest extends AbstractTestLockActionDto
 
         $lock->setReason(self::TEST_REASON);
         $this->assertEquals(self::TEST_REASON, $lock->getReason());
+    }
+
+    public function testDenormalize(): void
+    {
+        $class = static::getTestClassName();
+        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::PILLORY, length: 300, reason: self::TEST_REASON);
+
+        $this->assertEquals([
+            'lockId' => self::TEST_LOCKID,
+            'action' => ChasterDtoActions::PILLORY->value,
+            'length' => 300,
+            'reason' => self::TEST_REASON,
+        ], $lock->denormalize());
+
+        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::PILLORY, minLength: 300, maxLength: new DateInterval('PT10M'), reason: self::TEST_REASON);
+
+        $this->assertEquals([
+            'lockId' => self::TEST_LOCKID,
+            'action' => ChasterDtoActions::PILLORY->value,
+            'minLength' => 300,
+            'maxLength' => 600,
+            'reason' => self::TEST_REASON,
+        ], $lock->denormalize());
     }
 }

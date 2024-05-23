@@ -4,6 +4,7 @@ namespace Fake\ChasterDtoBundle\Objects\Dto;
 
 use Bytes\DateBundle\Objects\ComparableDateInterval;
 use DateInterval;
+use Exception;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
 use Fake\ChasterObjects\Objects\Lock\LockId;
@@ -28,14 +29,15 @@ class WearerLockActionDto extends AbstractLockDto
     }
 
     /**
+     * Returns a normalized array of key => value for data transfer.
+     *
      * @return array{lockId: string|null, action: string|null, length: DateInterval|null, minLength: DateInterval|null, maxLength: DateInterval|null}
+     *
+     * @throws Exception
      */
     public function denormalize(): array
     {
-        $return = [
-            'lockId' => $this->getLockId(),
-            'action' => $this->getAction()?->value,
-        ];
+        $return = parent::denormalize();
 
         if (!is_null($this->getLength())) {
             $return['length'] = ComparableDateInterval::normalizeToSeconds($this->getLength());
