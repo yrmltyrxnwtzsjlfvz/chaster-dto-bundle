@@ -24,6 +24,7 @@ class KeyholderLockActionDto extends AbstractLockDto
                     $max = $min;
                     $min = $temp;
                 }
+
                 $this->setLength(random_int($min, $max) * 60);
             }
         }
