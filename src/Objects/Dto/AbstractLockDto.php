@@ -5,9 +5,13 @@ namespace Fake\ChasterDtoBundle\Objects\Dto;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterObjects\Objects\Traits\LockIdTrait;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[DiscriminatorMap(typeProperty: 'actionString', mapping: [
     'create-lock' => CreateLockDto::class,
+    'disable-max-limit-date' => WearerLockActionDto::class,
+    'increase-max-limit-date' => WearerLockActionDto::class,
+    'trust-keyholder' => WearerLockActionDto::class,
     'time' => KeyholderLockActionDto::class,
     'pillory' => KeyholderLockActionDto::class,
     'freeze' => KeyholderLockActionDto::class,
@@ -46,4 +50,6 @@ abstract class AbstractLockDto implements LockDtoInterface
 
         return $this;
     }
+
+    abstract public function validate(ExecutionContextInterface $context, mixed $payload): void;
 }

@@ -10,6 +10,9 @@ enum ChasterDtoActions: string implements StringBackedEnumInterface
     use StringBackedEnumTrait;
 
     case CREATE_LOCK = 'create-lock';
+    case DISABLE_MAX_LIMIT_DATE = 'disable-max-limit-date';
+    case INCREASE_MAX_LIMIT_DATE = 'increase-max-limit-date';
+    case TRUST_KEYHOLDER = 'trust-keyholder';
     case TIME = 'time';
     case PILLORY = 'pillory';
     case FREEZE = 'freeze';
