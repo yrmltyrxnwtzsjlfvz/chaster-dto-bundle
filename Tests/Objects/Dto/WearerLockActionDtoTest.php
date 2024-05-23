@@ -58,4 +58,12 @@ class WearerLockActionDtoTest extends AbstractTestLockActionDto
 
         $this->assertNull($lock->getAction());
     }
+
+    public function testCreate(): void
+    {
+        $class = static::getTestClassName();
+        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, length: 300);
+
+        $this->assertInstanceOf(self::getTestClassName(), $lock);
+    }
 }

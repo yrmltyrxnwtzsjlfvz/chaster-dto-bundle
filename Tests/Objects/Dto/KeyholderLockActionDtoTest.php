@@ -102,6 +102,14 @@ class KeyholderLockActionDtoTest extends AbstractTestLockActionDto
         $this->validate($lock);
     }
 
+    public function testCreate(): void
+    {
+        $class = static::getTestClassName();
+        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, length: 300);
+
+        $this->assertInstanceOf(self::getTestClassName(), $lock);
+    }
+
     public function testGetSetReason()
     {
         $lock = self::createBasicDto()
