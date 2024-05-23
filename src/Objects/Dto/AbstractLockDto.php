@@ -52,4 +52,15 @@ abstract class AbstractLockDto implements LockDtoInterface
     }
 
     abstract public function validate(ExecutionContextInterface $context, mixed $payload): void;
+
+    /**
+     * Returns a normalized array of key => value for data transfer.
+     */
+    public function denormalize(): array
+    {
+        return [
+            'lockId' => $this->getLockId(),
+            'action' => $this->getAction()?->value,
+        ];
+    }
 }
