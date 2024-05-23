@@ -1,8 +1,9 @@
-name: prerelease
+name: release
 
 on:
   push:
     tags:
+      - v*
       - 'v*ALPHA*'
       - 'v*BETA*'
       - 'v*RC*'
