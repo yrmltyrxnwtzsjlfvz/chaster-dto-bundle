@@ -75,16 +75,16 @@ class WearerLockActionDtoTest extends AbstractTestLockActionDto
         $this->assertEquals([
             'lockId' => self::TEST_LOCKID,
             'action' => ChasterDtoActions::INCREASE_MAX_LIMIT_DATE->value,
-            'length' => new DateInterval('PT5M'),
+            'length' => 300,
         ], $lock->denormalize());
 
-        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, minLength: 300, maxLength: 600);
+        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, minLength: 300, maxLength: new DateInterval('PT10M'));
 
         $this->assertEquals([
             'lockId' => self::TEST_LOCKID,
             'action' => ChasterDtoActions::INCREASE_MAX_LIMIT_DATE->value,
-            'minLength' => new DateInterval('PT5M'),
-            'maxLength' => new DateInterval('PT10M'),
+            'minLength' => 300,
+            'maxLength' => 600,
         ], $lock->denormalize());
     }
 }
