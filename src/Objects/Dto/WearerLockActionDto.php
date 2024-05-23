@@ -39,9 +39,11 @@ class WearerLockActionDto extends AbstractLockDto
         if (!is_null($this->getLength())) {
             $return['length'] = $this->getLength();
         }
+
         if (!is_null($this->getMinLength())) {
             $return['minLength'] = $this->getMinLength();
         }
+
         if (!is_null($this->getMaxLength())) {
             $return['maxLength'] = $this->getMaxLength();
         }
