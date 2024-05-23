@@ -2,17 +2,14 @@
 
 namespace Fake\ChasterDtoBundle\Tests\Objects\Dto;
 
-use Bytes\DateBundle\Objects\ComparableDateInterval;
-use DateInterval;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterDtoBundle\Objects\Dto\KeyholderLockActionDto;
-use Generator;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 
 /**
  * @method static KeyholderLockActionDto createBasicDto()
  */
-class KeyholderLockActionDtoTest extends AbstractTestLockDto
+class KeyholderLockActionDtoTest extends AbstractTestLockActionDto
 {
     public const TEST_REASON = 'Test Reason';
 
@@ -59,7 +56,7 @@ class KeyholderLockActionDtoTest extends AbstractTestLockDto
         $lock = self::createBasicDto()
             ->setAction(ChasterDtoActions::PILLORY)
             ->setLength(300)
-            ->setReason(AbstractTestLockDto::TEST_LOCKID);
+            ->setReason(self::TEST_REASON);
 
         $this->assertEquals(1, $this->validate($lock));
     }
@@ -114,45 +111,5 @@ class KeyholderLockActionDtoTest extends AbstractTestLockDto
 
         $lock->setReason(self::TEST_REASON);
         $this->assertEquals(self::TEST_REASON, $lock->getReason());
-    }
-
-    public function provideEqualMinMaxLengths(): Generator
-    {
-        yield ['length' => 300, 'minLength' => 300, 'maxLength' => 300];
-    }
-
-    /**
-     * @dataProvider provideEqualMinMaxLengths
-     */
-    public function testRandomizeLengthEqual($length, $minLength, $maxLength): void
-    {
-        $lock = self::createBasicDto()
-            ->setMinLength($minLength)
-            ->setMaxLength($maxLength);
-
-        // $this->assertEquals(new \DateInterval('PT5M'), $lock->getMinLength());
-        // $this->assertEquals(new \DateInterval('PT5M'), $lock->getMaxLength());
-
-        $lock->randomizeLength();
-        $this->assertEquals(new DateInterval('PT5M'), $lock->getLength());
-    }
-
-    public function provideMinMaxLengths(): Generator
-    {
-        yield ['length' => [300, 360], 'minLength' => 300, 'maxLength' => 360];
-        yield ['length' => [300, 360], 'minLength' => 360, 'maxLength' => 300];
-    }
-
-    /**
-     * @dataProvider provideMinMaxLengths
-     */
-    public function testRandomizeLength($length, $minLength, $maxLength): void
-    {
-        $lock = self::createBasicDto()
-            ->setMinLength($minLength)
-            ->setMaxLength($maxLength);
-
-        $lock->randomizeLength();
-        $this->assertContains(ComparableDateInterval::normalizeToSeconds($lock->getLength()), $length);
     }
 }
