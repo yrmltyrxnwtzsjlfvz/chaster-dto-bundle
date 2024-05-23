@@ -52,4 +52,6 @@ abstract class AbstractLockDto implements LockDtoInterface
     }
 
     abstract public function validate(ExecutionContextInterface $context, mixed $payload): void;
+
+    abstract public function denormalize(): array;
 }
