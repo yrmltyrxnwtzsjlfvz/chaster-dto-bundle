@@ -1,0 +1,41 @@
+{
+    "name": "fake34526/chaster-dto-bundle",
+    "description": "Chaster objects",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "fake34526/chaster-objects": "^0.2 | ^0.3"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "mrgoodbytes8667/test-common": "^0.2.5 | ^0.3 | ^0.4.2",
+        "rector/rector": "^1.0",
+        "symfony/test-pack": "^1.0.9"
+    },
+    "authors": [
+        {
+            "name": "Fake",
+            "email": "fake@fake.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "conflict": {
+        "phpunit/phpunit": "<9.5 | 9.5.8 | >=10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fake\\ChasterDtoBundle\\": "src/",
+            "Fake\\ChasterDtoBundle\\Tests\\": "Tests/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/yrmltyrxnwtzsjlfvz/chaster-objects.git"
+        }
+    ],
+    "minimum-stability": "dev"
+}

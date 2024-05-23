@@ -1,0 +1,68 @@
+name: tests
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 0.*
+      - 1.*
+      - 2.*
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    timeout-minutes: 15
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ 8.2, 8.3 ]
+        prefer-lowest: [ false, true ]
+        os: [ ubuntu-latest ]
+    env:
+      SYMFONY_PHPUNIT_VERSION: 9.6
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Variables
+        id: set-variables
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+          if [ ${{ matrix.prefer-lowest }} == 'true' ]; then echo "::set-output name=preferLowest::--prefer-lowest"; else echo "::set-output name=preferLowest::"; fi
+          echo "::set-output name=cacheKeyPath::${{ format('{0}-php{1}-tests-composer-', runner.os, matrix.php) }}"
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.set-variables.outputs.dir }}
+          key: ${{ steps.set-variables.outputs.cacheKeyPath }}${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ steps.set-variables.outputs.cacheKeyPath }}
+
+      - name: Setup PHP
+        if: ${{ success() }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json, dom, curl, libxml, mbstring
+          coverage: none
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        if: ${{ success() }}
+        run: composer update ${{ steps.set-variables.outputs.preferLowest }} --prefer-stable --prefer-dist --no-interaction
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run PHPUnit
+        if: ${{ success() }}
+        run: php vendor/bin/phpunit
