@@ -2,8 +2,8 @@
 
 namespace Fake\ChasterDtoBundle\Tests\Objects\Dto;
 
+use DateInterval;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
-use Fake\ChasterDtoBundle\Objects\Dto\KeyholderLockActionDto;
 use Fake\ChasterDtoBundle\Objects\Dto\WearerLockActionDto;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 
@@ -65,5 +65,26 @@ class WearerLockActionDtoTest extends AbstractTestLockActionDto
         $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, length: 300);
 
         $this->assertInstanceOf(self::getTestClassName(), $lock);
+    }
+
+    public function testDenormalize(): void
+    {
+        $class = static::getTestClassName();
+        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, length: 300);
+
+        $this->assertEquals([
+            'lockId' => self::TEST_LOCKID,
+            'action' => ChasterDtoActions::INCREASE_MAX_LIMIT_DATE->value,
+            'length' => new DateInterval('PT5M'),
+        ], $lock->denormalize());
+
+        $lock = $class::create(lock: self::TEST_LOCKID, action: ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, minLength: 300, maxLength: 600);
+
+        $this->assertEquals([
+            'lockId' => self::TEST_LOCKID,
+            'action' => ChasterDtoActions::INCREASE_MAX_LIMIT_DATE->value,
+            'minLength' => new DateInterval('PT5M'),
+            'maxLength' => new DateInterval('PT10M'),
+        ], $lock->denormalize());
     }
 }

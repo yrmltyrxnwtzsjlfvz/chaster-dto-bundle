@@ -26,6 +26,29 @@ class WearerLockActionDto extends AbstractLockDto
             ->setMaxLength($maxLength);
     }
 
+    /**
+     * @return array{lockId: string|null, action: string|null, length: DateInterval|null, minLength: DateInterval|null, maxLength: DateInterval|null}
+     */
+    public function denormalize(): array
+    {
+        $return = [
+            'lockId' => $this->getLockId(),
+            'action' => $this->getAction()?->value,
+        ];
+
+        if (!is_null($this->getLength())) {
+            $return['length'] = $this->getLength();
+        }
+        if (!is_null($this->getMinLength())) {
+            $return['minLength'] = $this->getMinLength();
+        }
+        if (!is_null($this->getMaxLength())) {
+            $return['maxLength'] = $this->getMaxLength();
+        }
+
+        return $return;
+    }
+
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, mixed $payload): void
     {
