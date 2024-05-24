@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 trait LockActionDtoTrait
 {
     #[Assert\When(
-        expression: 'this.getAction() in [enum("Fake\\\ChasterDtoBundle\\\Enums\\\ChasterDtoActions::TIME"), enum("Fake\\\ChasterDtoBundle\\\Enums\\\ChasterDtoActions::PILLORY"), enum("Fake\\\ChasterDtoBundle\\\Enums\\\ChasterDtoActions::INCREASE_MAX_LIMIT_DATE")]',
+        expression: 'this.getAction() in [enum("Fake\\\ChasterDtoBundle\\\Enums\\\ChasterDtoActions::TIME"), enum("Fake\\\ChasterDtoBundle\\\Enums\\\ChasterDtoActions::TIME_WEARER"), enum("Fake\\\ChasterDtoBundle\\\Enums\\\ChasterDtoActions::PILLORY"), enum("Fake\\\ChasterDtoBundle\\\Enums\\\ChasterDtoActions::INCREASE_MAX_LIMIT_DATE")]',
         constraints: [
             new Assert\NotNull(),
         ]
