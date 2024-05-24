@@ -65,10 +65,8 @@ class WearerLockActionDto extends AbstractLockDto
 
         if ($this->getAction()?->equals(ChasterDtoActions::TIME_WEARER)) {
             $valid = false;
-            if (!is_null($this->getLength())) {
-                if (ComparableDateInterval::normalizeToSeconds($this->getLength()) > 0) {
-                    $valid = true;
-                }
+            if (!is_null($this->getLength()) && ComparableDateInterval::normalizeToSeconds($this->getLength()) > 0) {
+                $valid = true;
             }
 
             if (!$valid) {
