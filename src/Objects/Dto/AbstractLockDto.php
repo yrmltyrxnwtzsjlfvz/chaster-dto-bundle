@@ -8,21 +8,21 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[DiscriminatorMap(typeProperty: 'actionString', mapping: [
-    'create-lock' => CreateLockDto::class,
-    'disable-max-limit-date' => WearerLockActionDto::class,
-    'increase-max-limit-date' => WearerLockActionDto::class,
-    'trust-keyholder' => WearerLockActionDto::class,
     'time' => KeyholderLockActionDto::class,
     'pillory' => KeyholderLockActionDto::class,
     'freeze' => KeyholderLockActionDto::class,
     'unfreeze' => KeyholderLockActionDto::class,
-    'task' => KeyholderLockActionDto::class,
     'hide-timer' => KeyholderLockActionDto::class,
     'show-timer' => KeyholderLockActionDto::class,
-    'add-task-points' => KeyholderLockActionDto::class,
-    'remove-task-points' => KeyholderLockActionDto::class,
-    'add-share-links' => KeyholderLockActionDto::class,
-    'remove-share-links' => KeyholderLockActionDto::class,
+    'unlock' => KeyholderLockActionDto::class,
+    'archive' => KeyholderLockActionDto::class,
+    'create-lock' => CreateLockDto::class,
+    'disable-max-limit-date' => WearerLockActionDto::class,
+    'increase-max-limit-date' => WearerLockActionDto::class,
+    'trust-keyholder' => WearerLockActionDto::class,
+    'time-wearer' => WearerLockActionDto::class,
+    'unlock-wearer' => WearerLockActionDto::class,
+    'archive-wearer' => WearerLockActionDto::class,
 ])]
 abstract class AbstractLockDto implements LockDtoInterface
 {

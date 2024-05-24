@@ -57,10 +57,23 @@ class WearerLockActionDto extends AbstractLockDto
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, mixed $payload): void
     {
-        if (!$this->getAction()?->equals(ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, ChasterDtoActions::DISABLE_MAX_LIMIT_DATE, ChasterDtoActions::TRUST_KEYHOLDER)) {
+        if (!$this->getAction()?->equals(...ChasterDtoActions::getAllowedActionsForDto(static::class))) {
             $context->buildViolation('This object requires the action be one of "INCREASE_MAX_LIMIT_DATE", "DISABLE_MAX_LIMIT_DATE", "TRUST_KEYHOLDER".')
                 ->atPath('action')
                 ->addViolation();
+        }
+
+        if ($this->getAction()?->equals(ChasterDtoActions::TIME_WEARER)) {
+            $valid = false;
+            if (!is_null($this->getLength()) && ComparableDateInterval::normalizeToSeconds($this->getLength()) > 0) {
+                $valid = true;
+            }
+
+            if (!$valid) {
+                $context->buildViolation('"length" must be positive.')
+                    ->atPath('length')
+                    ->addViolation();
+            }
         }
     }
 }

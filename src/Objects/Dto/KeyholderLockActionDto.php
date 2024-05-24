@@ -32,7 +32,7 @@ class KeyholderLockActionDto extends AbstractLockDto
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, mixed $payload): void
     {
-        if ($this->getAction()?->equals(ChasterDtoActions::CREATE_LOCK, ChasterDtoActions::INCREASE_MAX_LIMIT_DATE, ChasterDtoActions::DISABLE_MAX_LIMIT_DATE, ChasterDtoActions::TRUST_KEYHOLDER)) {
+        if (!$this->getAction()?->equals(...ChasterDtoActions::getAllowedActionsForDto(static::class))) {
             $context->buildViolation('This object requires the action cannot be "CREATE_LOCK".')
                 ->atPath('action')
                 ->addViolation();

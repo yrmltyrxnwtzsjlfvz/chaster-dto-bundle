@@ -87,4 +87,59 @@ class WearerLockActionDtoTest extends AbstractTestLockActionDto
             'maxLength' => 600,
         ], $lock->denormalize());
     }
+
+
+    public function testIncreaseTime()
+    {
+        $lock = self::createBasicDto()
+            ->setAction(ChasterDtoActions::TIME_WEARER)
+            ->setLength(300);
+
+        $this->assertEquals(1, $this->validate($lock));
+    }
+
+    public function testIncreaseTimeRandom()
+    {
+        $lock = self::createBasicDto()
+            ->setAction(ChasterDtoActions::TIME_WEARER)
+            ->setMinLength(300)
+            ->setMaxLength(600)
+            ->randomizeLength();
+
+        $this->assertEquals(1, $this->validate($lock));
+    }
+
+    public function testIncreaseTimeNoLength()
+    {
+        $lock = self::createBasicDto()
+            ->setAction(ChasterDtoActions::TIME_WEARER);
+
+        $this->expectException(ValidationFailedException::class);
+
+        $this->validate($lock);
+    }
+
+    public function testDecreaseTime()
+    {
+        $lock = self::createBasicDto()
+            ->setAction(ChasterDtoActions::TIME_WEARER)
+        ->setLength(-300);
+
+        $this->expectException(ValidationFailedException::class);
+
+        $this->validate($lock);
+    }
+
+    public function testDecreaseTimeRandom()
+    {
+        $lock = self::createBasicDto()
+            ->setAction(ChasterDtoActions::TIME_WEARER)
+            ->setMinLength(-300)
+            ->setMaxLength(-600)
+            ->randomizeLength();
+
+        $this->expectException(ValidationFailedException::class);
+
+        $this->validate($lock);
+    }
 }

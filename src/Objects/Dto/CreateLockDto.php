@@ -28,7 +28,7 @@ class CreateLockDto extends AbstractLockDto
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, mixed $payload): void
     {
-        if (!$this->getAction()?->equals(ChasterDtoActions::CREATE_LOCK)) {
+        if (!$this->getAction()?->equals(...ChasterDtoActions::getAllowedActionsForDto(static::class))) {
             $context->buildViolation('This object requires the action to be "CREATE_LOCK".')
                 ->atPath('action')
                 ->addViolation();
