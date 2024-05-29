@@ -5,8 +5,11 @@ namespace Fake\ChasterDtoBundle\Objects\Dto;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterObjects\Objects\Traits\LockIdTrait;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
+use Symfony\Component\Serializer\Attribute\Context;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+#[Context([AbstractObjectNormalizer::SKIP_NULL_VALUES => true])]
 #[DiscriminatorMap(typeProperty: 'actionString', mapping: [
     'time' => KeyholderLockActionDto::class,
     'pillory' => KeyholderLockActionDto::class,
