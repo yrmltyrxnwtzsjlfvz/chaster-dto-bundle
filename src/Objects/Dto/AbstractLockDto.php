@@ -26,6 +26,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
     'time-wearer' => WearerLockActionDto::class,
     'unlock-wearer' => WearerLockActionDto::class,
     'archive-wearer' => WearerLockActionDto::class,
+    'hide-timer-wearer' => KeyholderLockActionDto::class,
+    'show-timer-wearer' => KeyholderLockActionDto::class,
 ])]
 abstract class AbstractLockDto implements LockDtoInterface
 {
