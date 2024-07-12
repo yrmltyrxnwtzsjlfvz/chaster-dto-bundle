@@ -24,6 +24,7 @@
         "sort-packages": true
     },
     "conflict": {
+        "fake34526/chaster-objects": "0.3.8",
         "phpunit/phpunit": "<9.5 | 9.5.8 | >=10"
     },
     "autoload": {
