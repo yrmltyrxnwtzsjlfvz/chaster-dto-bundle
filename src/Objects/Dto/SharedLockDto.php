@@ -11,6 +11,9 @@ class SharedLockDto extends SharedLock
     #[Assert\NotBlank]
     private ?string $password = null;
 
+    #[Assert\NotBlank]
+    private ?string $photoId = null;
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -34,5 +37,16 @@ class SharedLockDto extends SharedLock
     {
         return $this->setPassword($password)
             ->setRequirePassword(!empty($password));
+    }
+
+    public function getPhotoId(): ?string
+    {
+        return $this->photoId;
+    }
+
+    public function setPhotoId(?string $photoId): static
+    {
+        $this->photoId = $photoId;
+        return $this;
     }
 }
