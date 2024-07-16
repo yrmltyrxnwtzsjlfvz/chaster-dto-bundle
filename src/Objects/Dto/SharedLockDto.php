@@ -21,4 +21,14 @@ class SharedLockDto extends SharedLock
 
         return $this;
     }
+
+    public function hasDurations(): bool
+    {
+        return ($this->getMinDuration() ?? 0) > 0 || ($this->getMaxDuration() ?? 0) > 0 || ($this->getMaxLimitDuration() ?? 0) > 0;
+    }
+
+    public function hasDates(): bool
+    {
+        return !is_null($this->getMinDate()) || !is_null($this->getMaxDate()) || !is_null($this->getMaxLimitDate());
+    }
 }
