@@ -54,4 +54,28 @@ class SharedLockDtoTest extends TestCase
         self::assertTrue($dto->hasDates());
         self::assertFalse($dto->hasDurations());
     }
+
+    public function testCreate()
+    {
+        $test = SharedLockDtoFactory::createOne();
+
+        $dto = SharedLockDto::create(lockId: $test->getId(), displayRemainingTime: $test->getDisplayRemainingTime(),
+            photoId: $test->getPhotoId(), minDuration: $test->getMinDuration(), maxDuration: $test->getMaxDuration(),
+            maxLimitDuration: $test->getMaxLimitDuration(), minDate: $test->getMinDate(),
+            maxDate: $test->getMaxDate(), maxLimitDate: $test->getMaxLimitDate(), tags: $test->getTags());
+
+        self::assertSame($test->getId(), $dto->getId());
+        self::assertSame($test->getDisplayRemainingTime(), $dto->getDisplayRemainingTime());
+        self::assertSame($test->getHideTimeLogs(), $dto->getHideTimeLogs());
+        self::assertSame($test->getPhotoId(), $dto->getPhotoId());
+        self::assertSame($test->getMinDuration(), $dto->getMinDuration());
+        self::assertSame($test->getMaxDuration(), $dto->getMaxDuration());
+        self::assertSame($test->getMaxLimitDuration(), $dto->getMaxLimitDuration());
+        self::assertSame($test->getMinDate(), $dto->getMinDate());
+        self::assertSame($test->getMaxDate(), $dto->getMaxDate());
+        self::assertSame($test->getMaxLimitDate(), $dto->getMaxLimitDate());
+        self::assertSame($test->getLimitLockTime(), $dto->getLimitLockTime());
+        self::assertSame($test->getTags(), $dto->getTags());
+
+    }
 }
