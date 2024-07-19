@@ -3,7 +3,7 @@
 namespace Fake\ChasterDtoBundle\Tests\Objects\Dto;
 
 use Fake\ChasterDtoBundle\Objects\Dto\SharedLockDto;
-use Fake\ChasterDtoBundle\Tests\Factory\SharedLockDtoFactory;
+use Fake\ChasterDtoFactory\Factory\SharedLockDtoFactory;
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
 use Zenstruck\Foundry\Test\Factories;
