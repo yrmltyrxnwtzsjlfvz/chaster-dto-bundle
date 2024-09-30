@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "fake34526/chaster-objects": "^0.4",
+        "fake34526/chaster-objects": "^0.4.3",
         "symfony/expression-language": "^6.4 | ^7.0"
     },
     "require-dev": {

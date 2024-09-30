@@ -33,6 +33,8 @@ enum ChasterDtoActions: string implements StringBackedEnumInterface
     case MARK_TEST_WEARER = 'mark-test-wearer';
     case HIDE_TIMER_WEARER = 'hide-timer-wearer';
     case SHOW_TIMER_WEARER = 'show-timer-wearer';
+    case COMPLETE_TASK_WEARER = 'complete-task-wearer';
+    case ABANDON_TASK_WEARER = 'abandon-task-wearer';
     // case TASK = 'task';
     // case ADD_TASK_POINTS = 'add-task-points';
     // case REMOVE_TASK_POINTS = 'remove-task-points';
@@ -75,6 +77,8 @@ enum ChasterDtoActions: string implements StringBackedEnumInterface
                     ChasterDtoActions::MARK_TEST_WEARER,
                     ChasterDtoActions::HIDE_TIMER_WEARER,
                     ChasterDtoActions::SHOW_TIMER_WEARER,
+                    ChasterDtoActions::COMPLETE_TASK_WEARER,
+                    ChasterDtoActions::ABANDON_TASK_WEARER,
                 ];
                 break;
         }
