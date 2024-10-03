@@ -21,6 +21,8 @@ enum ChasterDtoActions: string implements StringBackedEnumInterface
     case HIDE_TIMER = 'hide-timer';
     case SHOW_TIMER = 'show-timer';
     case UNLOCK = 'unlock';
+    case TEMPORARY_UNLOCK = 'temporary-unlock';
+    case TEMPORARY_RELOCK = 'temporary-relock';
     case ARCHIVE = 'archive';
 
     case CREATE_LOCK = 'create-lock';
@@ -29,6 +31,8 @@ enum ChasterDtoActions: string implements StringBackedEnumInterface
     case TRUST_KEYHOLDER = 'trust-keyholder';
     case TIME_WEARER = 'time-wearer';
     case UNLOCK_WEARER = 'unlock-wearer';
+    case TEMPORARY_UNLOCK_WEARER = 'temporary-unlock-wearer';
+    case TEMPORARY_RELOCK_WEARER = 'temporary-relock-wearer';
     case ARCHIVE_WEARER = 'archive-wearer';
     case MARK_TEST_WEARER = 'mark-test-wearer';
     case HIDE_TIMER_WEARER = 'hide-timer-wearer';
@@ -63,6 +67,8 @@ enum ChasterDtoActions: string implements StringBackedEnumInterface
                     ChasterDtoActions::HIDE_TIMER,
                     ChasterDtoActions::SHOW_TIMER,
                     ChasterDtoActions::UNLOCK,
+                    ChasterDtoActions::TEMPORARY_UNLOCK,
+                    ChasterDtoActions::TEMPORARY_RELOCK,
                     ChasterDtoActions::ARCHIVE,
                 ];
                 break;
@@ -73,6 +79,8 @@ enum ChasterDtoActions: string implements StringBackedEnumInterface
                     ChasterDtoActions::TRUST_KEYHOLDER,
                     ChasterDtoActions::TIME_WEARER,
                     ChasterDtoActions::UNLOCK_WEARER,
+                    ChasterDtoActions::TEMPORARY_UNLOCK_WEARER,
+                    ChasterDtoActions::TEMPORARY_RELOCK_WEARER,
                     ChasterDtoActions::ARCHIVE_WEARER,
                     ChasterDtoActions::MARK_TEST_WEARER,
                     ChasterDtoActions::HIDE_TIMER_WEARER,
