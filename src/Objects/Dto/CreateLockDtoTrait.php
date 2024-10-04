@@ -2,8 +2,8 @@
 
 namespace Fake\ChasterDtoBundle\Objects\Dto;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Fake\ChasterObjects\Objects\Traits\LockIdTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait CreateLockDtoTrait
 {

@@ -4,9 +4,7 @@ namespace Fake\ChasterDtoBundle\Objects\Dto;
 
 use Bytes\DateBundle\Objects\ComparableDateInterval;
 use DateInterval;
-use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 trait LockActionDtoTrait
 {

@@ -76,6 +76,5 @@ class SharedLockDtoTest extends TestCase
         self::assertSame($test->getMaxLimitDate(), $dto->getMaxLimitDate());
         self::assertSame($test->getLimitLockTime(), $dto->getLimitLockTime());
         self::assertSame($test->getTags(), $dto->getTags());
-
     }
 }

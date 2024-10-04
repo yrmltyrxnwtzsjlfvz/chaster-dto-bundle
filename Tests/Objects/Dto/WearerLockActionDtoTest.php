@@ -88,7 +88,6 @@ class WearerLockActionDtoTest extends AbstractTestLockActionDto
         ], $lock->denormalize());
     }
 
-
     public function testIncreaseTime()
     {
         $lock = self::createBasicDto()
