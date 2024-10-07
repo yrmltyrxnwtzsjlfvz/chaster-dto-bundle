@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
     'hide-timer' => KeyholderLockActionDto::class,
     'show-timer' => KeyholderLockActionDto::class,
     'unlock' => KeyholderLockActionDto::class,
+    'temporary-unlock' => KeyholderLockActionDto::class,
+    'temporary-relock' => KeyholderLockActionDto::class,
     'archive' => KeyholderLockActionDto::class,
     'create-lock' => CreateLockDto::class,
     'disable-max-limit-date' => WearerLockActionDto::class,
@@ -25,9 +27,13 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
     'trust-keyholder' => WearerLockActionDto::class,
     'time-wearer' => WearerLockActionDto::class,
     'unlock-wearer' => WearerLockActionDto::class,
+    'temporary-unlock-wearer' => WearerLockActionDto::class,
+    'temporary-relock-wearer' => WearerLockActionDto::class,
     'archive-wearer' => WearerLockActionDto::class,
     'hide-timer-wearer' => KeyholderLockActionDto::class,
     'show-timer-wearer' => KeyholderLockActionDto::class,
+    'complete-task-wearer' => WearerLockActionDto::class,
+    'abandon-task-wearer' => WearerLockActionDto::class,
 ])]
 abstract class AbstractLockDto implements LockDtoInterface
 {
