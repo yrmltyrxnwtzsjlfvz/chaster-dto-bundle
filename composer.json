@@ -5,11 +5,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "fake34526/chaster-objects": "^0.4.20",
+        "fake34526/chaster-objects": "^0.4.21",
         "symfony/expression-language": "^6.4 | ^7.0"
     },
     "require-dev": {
-        "fake34526/chaster-dto-factory": "^0.4",
+        "fake34526/chaster-dto-factory": "^0.4.21",
         "friendsofphp/php-cs-fixer": "^3.4",
         "mrgoodbytes8667/test-common": "^0.2.5 | ^0.3 | ^0.4.2",
         "rector/rector": "^1.2",
