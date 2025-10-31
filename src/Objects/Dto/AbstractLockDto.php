@@ -2,6 +2,8 @@
 
 namespace Fake\ChasterDtoBundle\Objects\Dto;
 
+use Bytes\DateBundle\Objects\ComparableDateInterval;
+use DateInterval;
 use Fake\ChasterDtoBundle\Enums\ChasterDtoActions;
 use Fake\ChasterObjects\Objects\Traits\LockIdTrait;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
@@ -42,6 +44,8 @@ abstract class AbstractLockDto implements LockDtoInterface
 
     private ?string $actionString = null;
 
+    private int $delay = 0;
+
     public function getActionString(): ?string
     {
         return $this->actionString;
@@ -72,6 +76,19 @@ abstract class AbstractLockDto implements LockDtoInterface
         return [
             'lockId' => $this->getLockId(),
             'action' => $this->getAction()?->value,
+            'delay' => $this->getDelay(),
         ];
+    }
+
+    public function getDelay(): int
+    {
+        return $this->delay;
+    }
+
+    public function setDelay(DateInterval|int $delay): static
+    {
+        $this->delay = ComparableDateInterval::normalizeToSeconds($delay);
+
+        return $this;
     }
 }
